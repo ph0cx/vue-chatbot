@@ -17,10 +17,13 @@
         template(v-slot:botTyping)
           slot(name="botTyping")
       BoardAction(
+        ref="boardAction"
         :input-disable="inputDisable",
         :input-placeholder="optionsMain.inputPlaceholder",
         :input-disable-placeholder="optionsMain.inputDisablePlaceholder",
-        @msg-send="sendMessage"
+        :show-mic-button="optionsMain.showMicButton"
+        @msg-send="sendMessage",
+        @mic-state="handleMicState"
       )
         template(v-slot:actions)
           slot(name="actions")
@@ -115,7 +118,19 @@ export default {
         inputPlaceholder: 'Message',
         inputDisableBg: '#fff',
         inputDisablePlaceholder: null
-      }
+      },
+      micOn: false,
+      isBotAudioPlaying: false,
+      micWasOnBeforeBotAudio: false
+    }
+  },
+
+  watch: {
+    messages: {
+      handler () {
+        this.autoPlayBotResponses()
+      },
+      deep: true
     }
   },
 
@@ -193,6 +208,79 @@ export default {
 
     selectOption (value) {
       this.$emit('msg-send', value)
+    },
+
+    autoPlayBotResponses () {
+      if (!this.micOn || this.isBotAudioPlaying) return
+      // Find next unplayed bot message
+      const next = (this.messages || []).find(msg =>
+        msg.agent === 'bot' && !msg._audioPlayed && msg.text
+      )
+      if (!next) return
+      // If mic is on, turn it off and remember to turn it back on after audio
+      if (this.micOn) {
+        this.micWasOnBeforeBotAudio = true
+        this.$refs.boardAction && this.$refs.boardAction.stopRecording && this.$refs.boardAction.stopRecording()
+        this.micOn = false
+      }
+      this.isBotAudioPlaying = true
+      // Gather all texts: main + options (if any)
+      const texts = [next.text, ...(next.options ? next.options.map(opt => opt.text) : [])]
+      const playAll = async () => {
+        try {
+          for (let i = 0; i < texts.length; i++) {
+            const text = texts[i]
+            const cacheKey = text
+            if (!window._audioCache) window._audioCache = {}
+            let blob
+            if (window._audioCache[cacheKey]) {
+              blob = window._audioCache[cacheKey]
+            } else {
+              const response = await fetch('https://api-aitext2speech.hayokmedicare.ng/api/text-to-speech/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text })
+              })
+              if (!response.ok) throw new Error('TTS failed')
+              blob = await response.blob()
+              window._audioCache[cacheKey] = blob
+            }
+            const url = URL.createObjectURL(blob)
+            const audio = new Audio(url)
+            await new Promise((resolve) => {
+              audio.onended = () => {
+                URL.revokeObjectURL(url)
+                resolve()
+              }
+              audio.onerror = () => {
+                URL.revokeObjectURL(url)
+                resolve()
+              }
+              audio.play()
+            })
+          }
+        } catch (e) {
+          // Optionally log error
+        }
+        next._audioPlayed = true
+        this.isBotAudioPlaying = false
+        setTimeout(() => {
+          if (this.micWasOnBeforeBotAudio) {
+            this.micOn = true
+            this.micWasOnBeforeBotAudio = false
+            this.$refs.boardAction && this.$refs.boardAction.startRecording && this.$refs.boardAction.startRecording()
+          }
+          this.autoPlayBotResponses()
+        }, 100)
+      }
+      playAll()
+    },
+
+    handleMicState (state) {
+      this.micOn = state
+      if (state) {
+        this.autoPlayBotResponses()
+      }
     }
   }
 }
