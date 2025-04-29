@@ -56,7 +56,7 @@ export default {
         this.audio.play()
       } catch (e) {
         this.isPlaying = false
-        alert('Text-to-speech failed')
+        console.error('Text-to-speech failed', e)
       }
     }
   }

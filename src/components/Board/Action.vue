@@ -129,7 +129,7 @@ export default {
           }
         }
         this.recognition.onerror = (e) => {
-          console.error('SpeechRecognition error:', e)
+          console.error('SpeechRecognition error', e)
         }
         this.recognition.onend = () => {
           if (this.isRecording) {
@@ -137,7 +137,7 @@ export default {
               this.recognition.start()
             } catch (e) {
               if (e.name !== 'InvalidStateError') {
-                console.error('SpeechRecognition restart error:', e)
+                console.error('SpeechRecognition restart error occurred', e)
               }
             }
           }
@@ -148,7 +148,7 @@ export default {
       }
       // Fallback to MediaRecorder if SpeechRecognition is not available
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        alert('Microphone not supported')
+        console.error('Microphone not supported')
         return
       }
       try {
@@ -156,8 +156,7 @@ export default {
         this.isRecording = true
         this.listenLoop()
       } catch (err) {
-        alert('Could not access microphone')
-        console.error('Stream error:', err)
+        console.error('Could not access microphone', err)
       }
     },
     stopRecording () {
@@ -170,7 +169,7 @@ export default {
         try {
           this.recognition.stop()
         } catch (e) {
-          console.error('SpeechRecognition stop error:', e)
+          console.error('SpeechRecognition stop error occurred', e)
         }
         this.recognition = null
       }
@@ -182,7 +181,7 @@ export default {
             this.mediaRecorder.stop()
           }
         } catch (e) {
-          console.error('MediaRecorder stop error:', e)
+          console.error('MediaRecorder stop error occurred', e)
         }
         this.mediaRecorder = null
       }
@@ -190,7 +189,7 @@ export default {
         try {
           this.stream.getTracks().forEach(track => track.stop())
         } catch (e) {
-          console.error('Stream stop error:', e)
+          console.error('Stream stop error occurred', e)
         }
         this.stream = null
       }
@@ -226,14 +225,14 @@ export default {
             this.sendMessage()
           }
         } catch (e) {
-          console.error('Speech-to-text error:', e)
+          console.error('Speech-to-text error occurred', e)
         }
         if (this.isRecording) {
           setTimeout(() => this.listenLoop(), 200)
         }
       }
       this.mediaRecorder.onerror = (e) => {
-        console.error('MediaRecorder error:', e)
+        console.error('MediaRecorder error occurred', e)
       }
       this.mediaRecorder.start()
       setTimeout(() => {

@@ -89,6 +89,7 @@ export default {
         }
       } catch (e) {
         // Optionally alert or log
+        console.error('Text-to-speech failed', e)
       }
       this.isPlayingMain = false
     }

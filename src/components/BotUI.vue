@@ -261,6 +261,7 @@ export default {
           }
         } catch (e) {
           // Optionally log error
+          console.error('Text-to-speech failed', e)
         }
         next._audioPlayed = true
         this.isBotAudioPlaying = false
@@ -279,6 +280,12 @@ export default {
     handleMicState (state) {
       this.micOn = state
       if (state) {
+        // Mark all current bot messages as played so only new ones are auto-played
+        if (Array.isArray(this.messages)) {
+          this.messages.forEach(msg => {
+            if (msg.agent === 'bot') msg._audioPlayed = true
+          })
+        }
         this.autoPlayBotResponses()
       }
     }

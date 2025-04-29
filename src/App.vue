@@ -36,9 +36,9 @@ export default {
         msgBubbleBgBot: '#fff',
         inputPlaceholder: 'Type hereeee...',
         inputDisableBg: '#fff',
-        inputDisablePlaceholder: 'Hit the buttons above to respond',
+        inputDisablePlaceholder: 'Hit the buttons above to respond'
         // showPlayButton: false, // new option
-        showMicButton: false // new option
+        //  showMicButton: false // new option
       }
     }
   },
