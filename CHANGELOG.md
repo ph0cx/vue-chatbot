@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.12 (2026-03-25)
+
+
+### Bug Fixes
+
+* Bubble button focus outline ([306384a](https://github.com/JuzSer/vue-bot-ui/commit/306384ae1e271451ed54a5cc956c45233c69fa6c))
+* css.extract vue-cli ([eef2ece](https://github.com/JuzSer/vue-bot-ui/commit/eef2ece26f374f9e55ef7092748b58da02f51508))
+* demo page without bubble open delay ([39e36a1](https://github.com/JuzSer/vue-bot-ui/commit/39e36a127302c659d6c457fbb55f3b250c15aba6))
+* import links ([85f69da](https://github.com/JuzSer/vue-bot-ui/commit/85f69da7c5be7e3a2012ed4ebc2682b71b8840f6))
+* select option not available after close the board ([2fa4f01](https://github.com/JuzSer/vue-bot-ui/commit/2fa4f0133f8f9034ed85d3b7645af325a5d177cf))
+* style of message-bubble ([61cb61d](https://github.com/JuzSer/vue-bot-ui/commit/61cb61dc100addfb5ba14e90cdbc96ffdbda94cb))
+
 ### [0.2.11](https://github.com/JuzSer/vue-bot-ui/compare/v0.2.10...v0.2.11) (2024-09-18)
 
 ### [0.2.10](https://github.com/JuzSer/vue-bot-ui/compare/v0.2.10-next.0...v0.2.10) (2024-09-18)
