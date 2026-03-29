@@ -21,23 +21,30 @@ export default {
     VueBotUI
   },
 
+  props: {
+    userOptions: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+
   data () {
     return {
       messageData: [],
       botTyping: false,
       inputDisable: false,
-      selectedState: 'zamfara',
+      selectedState: this.userOptions.selectedState || 'zamfara',
       stateEndpoints: STATE_ENDPOINTS,
       botOptions: {
-        botTitle: 'RIVCHPP Health Assistant',
+        botTitle: 'HIVA',
         botAvatarImg: BotIcon,
         boardContentBg: '#f4f4f4',
         msgBubbleBgBot: '#fff',
         inputPlaceholder: '',
         inputDisableBg: '#fff',
         inputDisablePlaceholder: '',
-        colorScheme: '#008374',
-        msgBubbleBgUser: '#008374',
+        colorScheme: this.userOptions.colorScheme || '#008374',
+        msgBubbleBgUser: this.userOptions.msgBubbleBgUser || '#008374',
         showMicButton: false
       }
     }
