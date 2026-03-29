@@ -1,51 +1,76 @@
-<template lang="pug">
-.qkb-bot-ui(
-  :class="uiClasses"
-)
-  transition(name="qkb-fadeUp")
-    .qkb-board(v-if="botActive")
-      BoardHeader(
-        :bot-title="optionsMain.botTitle",
-        @close-bot="botToggle"
-      )
-        template(v-slot:header)
-          slot(name="header")
-      BoardContent(
-        :bot-typing="botTyping",
-        :main-data="messages"
-      )
-        template(v-slot:botTyping)
-          slot(name="botTyping")
-      BoardAction(
-        ref="boardAction"
-        :input-disable="inputDisable",
-        :input-placeholder="optionsMain.inputPlaceholder",
-        :input-disable-placeholder="optionsMain.inputDisablePlaceholder",
-        :show-mic-button="optionsMain.showMicButton"
-        @msg-send="sendMessage",
-        @mic-state="handleMicState"
-      )
-        template(v-slot:actions)
-          slot(name="actions")
-        template(v-slot:sendButton)
-          slot(name="sendButton")
-  .qkb-bot-bubble
-    button.qkb-bubble-btn(
-      @click="botToggle"
-    )
-      slot(name="bubbleButton")
-        transition(name="qkb-scaleUp")
-          BubbleIcon.qkb-bubble-btn-icon(
-            v-if="!botActive",
-            key="1"
-          )
-          CloseIcon.qkb-bubble-btn-icon.qkb-bubble-btn-icon--close(
-            v-else,
-            key="2"
-          )
-  AppStyle(:options="optionsMain")
-  .qkb-preload-image
-    .qkb-msg-avatar__img(v-if="optionsMain.botAvatarImg")
+<template>
+  <div
+    class="qkb-bot-ui"
+    :class="uiClasses"
+  >
+    <transition name="qkb-fadeUp">
+      <div
+        v-if="botActive"
+        class="qkb-board"
+      >
+        <BoardHeader
+          :bot-title="optionsMain.botTitle"
+          @close-bot="botToggle"
+        >
+          <template #header>
+            <slot name="header" />
+          </template>
+        </BoardHeader>
+        <BoardContent
+          :bot-typing="botTyping"
+          :main-data="messages"
+        >
+          <template #botTyping>
+            <slot name="botTyping" />
+          </template>
+        </BoardContent>
+        <BoardAction
+          ref="boardAction"
+          :input-disable="inputDisable"
+          :input-placeholder="optionsMain.inputPlaceholder"
+          :input-disable-placeholder="optionsMain.inputDisablePlaceholder"
+          :show-mic-button="optionsMain.showMicButton"
+          @msg-send="sendMessage"
+          @mic-state="handleMicState"
+        >
+          <template #actions>
+            <slot name="actions" />
+          </template>
+          <template #sendButton>
+            <slot name="sendButton" />
+          </template>
+        </BoardAction>
+      </div>
+    </transition>
+    <div class="qkb-bot-bubble">
+      <button
+        class="qkb-bubble-btn"
+        @click="botToggle"
+      >
+        <slot name="bubbleButton">
+          <transition name="qkb-scaleUp">
+            <BubbleIcon
+              v-if="!botActive"
+              key="1"
+              class="qkb-bubble-btn-icon"
+            />
+            <CloseIcon
+              v-else
+              key="2"
+              class="qkb-bubble-btn-icon qkb-bubble-btn-icon--close"
+            />
+          </transition>
+        </slot>
+      </button>
+    </div>
+    <AppStyle :options="optionsMain" />
+    <div class="qkb-preload-image">
+      <div
+        v-if="optionsMain.botAvatarImg"
+        class="qkb-msg-avatar__img"
+      />
+    </div>
+  </div>
 </template>
 <script>
 import EventBus from '../helpers/event-bus'
@@ -76,7 +101,8 @@ export default {
     },
 
     messages: {
-      type: Array
+      type: Array,
+      default: () => []
     },
 
     botTyping: {
@@ -95,9 +121,12 @@ export default {
     },
 
     openDelay: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
+
+  emits: ['init', 'destroy', 'msg-send'],
 
   data () {
     return {
@@ -126,15 +155,6 @@ export default {
     }
   },
 
-  watch: {
-    messages: {
-      handler () {
-        this.autoPlayBotResponses()
-      },
-      deep: true
-    }
-  },
-
   computed: {
     optionsMain () {
       return { ...this.defaultOptions, ...this.options }
@@ -142,13 +162,22 @@ export default {
 
     // Add class to bot ui wrapper
     uiClasses () {
-      let classes = []
+      const classes = []
 
       if (this.optionsMain.animation) {
         classes.push('qkb-bot-ui--animate')
       }
 
       return classes
+    }
+  },
+
+  watch: {
+    messages: {
+      handler () {
+        this.autoPlayBotResponses()
+      },
+      deep: true
     }
   },
 
@@ -163,19 +192,20 @@ export default {
   },
 
   mounted () {
-    document.addEventListener(Config.EVENT_OPEN, function () {
-      this.botOpen()
-    })
-    document.addEventListener(Config.EVENT_CLOSE, function () {
-      this.botClose()
-    })
-    document.addEventListener(Config.EVENT_TOGGLE, function () {
-      this.botToggle()
-    })
+    this.handleOpen = () => this.botOpen()
+    this.handleClose = () => this.botClose()
+    this.handleToggle = () => this.botToggle()
+
+    document.addEventListener(Config.EVENT_OPEN, this.handleOpen)
+    document.addEventListener(Config.EVENT_CLOSE, this.handleClose)
+    document.addEventListener(Config.EVENT_TOGGLE, this.handleToggle)
   },
 
-  beforeDestroy () {
-    EventBus.$off('select-button-option')
+  unmounted () {
+    document.removeEventListener(Config.EVENT_OPEN, this.handleOpen)
+    document.removeEventListener(Config.EVENT_CLOSE, this.handleClose)
+    document.removeEventListener(Config.EVENT_TOGGLE, this.handleToggle)
+    EventBus.off('select-button-option')
   },
 
   methods: {
@@ -195,10 +225,10 @@ export default {
       this.botActive = !this.botActive
 
       if (this.botActive) {
-        EventBus.$on('select-button-option', this.selectOption)
+        EventBus.on('select-button-option', this.selectOption)
         this.$emit('init')
       } else {
-        EventBus.$off('select-button-option')
+        EventBus.off('select-button-option')
         this.$emit('destroy')
       }
     },

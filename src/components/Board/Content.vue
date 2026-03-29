@@ -1,16 +1,27 @@
-<template lang="pug">
-.qkb-board-content(ref="boardContent")
-  .qkb-board-content__bubbles(
-    ref="boardBubbles"
-  )
-    message-bubble(
-      v-for="(item, index) in mainData",
-      :key="index",
-      :message="item",
-    )
-    .qkb-board-content__bot-typing(v-if="botTyping")
-      slot(name="botTyping")
-        message-typing
+<template>
+  <div
+    ref="boardContent"
+    class="qkb-board-content"
+  >
+    <div
+      ref="boardBubbles"
+      class="qkb-board-content__bubbles"
+    >
+      <message-bubble
+        v-for="(item, index) in mainData"
+        :key="index"
+        :message="item"
+      />
+      <div
+        v-if="botTyping"
+        class="qkb-board-content__bot-typing"
+      >
+        <slot name="botTyping">
+          <message-typing />
+        </slot>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

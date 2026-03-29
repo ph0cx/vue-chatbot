@@ -1,16 +1,14 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@use 'bootstrap/scss/bootstrap' as *;
 
-@import 'variables';
+@use 'variables' as *;
 
-@import './common/main';
-@import './common/animation';
+@use './common/main';
+@use './common/animation';
 
-@import './components/bubble-btn';
-@import './components/board';
-@import './components/header';
-@import './components/content';
-@import './components/action';
+@use './components/bubble-btn';
+@use './components/board';
+@use './components/header';
+@use './components/content';
+@use './components/action';
 
 

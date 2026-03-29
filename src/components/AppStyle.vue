@@ -1,9 +1,20 @@
-<template lang="pug">
-.qkb-bot-style(v-html="style", style="display: none")
+<template>
+  <!-- eslint-disable vue/no-v-html -->
+  <div
+    class="qkb-bot-style"
+    style="display: none"
+    v-html="style"
+  />
+  <!-- eslint-enable vue/no-v-html -->
 </template>
 <script>
 export default {
-  props: ['options'],
+  props: {
+    options: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   computed: {
     style () {
       if (!this.options) {

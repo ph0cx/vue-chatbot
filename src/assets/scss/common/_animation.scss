@@ -1,3 +1,6 @@
+@use '../variables' as *;
+@use 'sass:math';
+
 .qkb-bot-ui--animate {
   // FadeUp
   .qkb-fadeUp-enter-active,
@@ -50,7 +53,7 @@ $typing-duration: .35s;
   }
 
   span {
-    animation-delay: $typing-duration / 2;
+    animation-delay: math.div($typing-duration, 2);
   }
 
   &::after {

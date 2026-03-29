@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .qkb-bot-ui {
   position: fixed;
   z-index: $bot-zindex;

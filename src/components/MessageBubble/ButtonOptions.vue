@@ -1,27 +1,42 @@
-<template lang="pug">
-.qkb-msg-bubble-component.qkb-msg-bubble-component--button-options
-  .qkb-msg-bubble-component__text
-    | {{ mainData.text }}
-    button.qkb-msg-bubble-play-btn(@click="playAllText" :disabled="isPlayingMain" style="margin-left:8px; background:none; border:none; cursor:pointer;")
-      span(v-if="!isPlayingMain") ▶️
-      span(v-else) ⏸️
-  .qkb-msg-bubble-component__options-wrapper
-    .qkb-mb-button-options__item(
-      v-for="(item, index) in mainData.options",
-      :class="{ active: selectedItem === item.value }",
-      :key="index"
-    )
-      button.qkb-mb-button-options__btn(
-        v-if="item.action === 'postback'",
-        @click="selectOption(item)"
-      )
-        span {{ item.text }}
-      a.qkb-mb-button-options__btn.qkb-mb-button-options__url(
-        target="_blank",
-        v-else,
-        :href="item.value"
-      )
-        span {{ item.text }}
+<template>
+  <div class="qkb-msg-bubble-component qkb-msg-bubble-component--button-options">
+    <div class="qkb-msg-bubble-component__text">
+      {{ mainData.text }}
+      <button
+        class="qkb-msg-bubble-play-btn"
+        :disabled="isPlayingMain"
+        style="margin-left: 8px; background: none; border: none; cursor: pointer;"
+        @click="playAllText"
+      >
+        <span v-if="!isPlayingMain">▶️</span>
+        <span v-else>⏸️</span>
+      </button>
+    </div>
+    <div class="qkb-msg-bubble-component__options-wrapper">
+      <div
+        v-for="(item, index) in mainData.options"
+        :key="index"
+        class="qkb-mb-button-options__item"
+        :class="{ active: selectedItem === item.value }"
+      >
+        <button
+          v-if="item.action === 'postback'"
+          class="qkb-mb-button-options__btn"
+          @click="selectOption(item)"
+        >
+          <span>{{ item.text }}</span>
+        </button>
+        <a
+          v-else
+          class="qkb-mb-button-options__btn qkb-mb-button-options__url"
+          target="_blank"
+          :href="item.value"
+        >
+          <span>{{ item.text }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import EventBus from '../../helpers/event-bus'
@@ -29,7 +44,8 @@ import EventBus from '../../helpers/event-bus'
 export default {
   props: {
     mainData: {
-      type: Object
+      type: Object,
+      default: () => ({})
     }
   },
   data () {
@@ -43,7 +59,7 @@ export default {
   methods: {
     selectOption (value) {
       this.selectedItem = value
-      EventBus.$emit('select-button-option', value)
+      EventBus.emit('select-button-option', value)
     },
     async playAllText () {
       if (this.isPlayingMain) {

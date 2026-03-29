@@ -1,18 +1,19 @@
-<template lang="pug">
-#app
-  img(
-    alt="Vue Bot UI",
-    src="./assets/logo.png"
-  )
-  VueBotUI(
-    :options="botOptions",
-    :messages="messageData",
-    :bot-typing="botTyping",
-    :input-disable="inputDisable",
-    :is-open="false",
-    @init="botStart",
-    @msg-send="msgSend",
-  )
+<template>
+  <div id="app">
+    <img
+      alt="Vue Bot UI"
+      src="./assets/logo.png"
+    >
+    <VueBotUI
+      :options="botOptions"
+      :messages="messageData"
+      :bot-typing="botTyping"
+      :input-disable="inputDisable"
+      :is-open="false"
+      @init="botStart"
+      @msg-send="msgSend"
+    />
+  </div>
 </template>
 <script>
 import BotIcon from './assets/icons/bot.png'
@@ -21,7 +22,6 @@ import { messageService, STATE_ENDPOINTS } from './helpers/message'
 
 export default {
   components: {
-    BotIcon,
     VueBotUI
   },
 
@@ -60,7 +60,7 @@ export default {
         this.messageData.push({
           agent: 'bot',
           type: 'text',
-          text: `Hello! I am your ${this.stateEndpoints[this.selectedState].name} assistant. How can I help you today?`
+          text: `Hello! I am your ${this.stateEndpoints[this.selectedState].name} . How can I help you today?`
         })
       }, 1000)
     },

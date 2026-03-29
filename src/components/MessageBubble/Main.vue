@@ -1,14 +1,28 @@
-<template lang="pug">
-.qkb-msg-bubble(:class="bubbleClass")
-  .qkb-msg-avatar(v-if="message.agent === 'bot'")
-    .qkb-msg-avatar__img &nbsp;
-  component(
-    v-if="componentType",
-    :is="componentType",
-    :main-data="message"
-  )
-  .qkb-msg-bubble__time(v-if="message.createdAt")
-    | {{ message.createdAt }}
+<template>
+  <div
+    class="qkb-msg-bubble"
+    :class="bubbleClass"
+  >
+    <div
+      v-if="message.agent === 'bot'"
+      class="qkb-msg-avatar"
+    >
+      <div class="qkb-msg-avatar__img">
+&nbsp;
+      </div>
+    </div>
+    <component
+      :is="componentType"
+      v-if="componentType"
+      :main-data="message"
+    />
+    <div
+      v-if="message.createdAt"
+      class="qkb-msg-bubble__time"
+    >
+      {{ message.createdAt }}
+    </div>
+  </div>
 </template>
 <script>
 import SingleText from './SingleText'
@@ -22,7 +36,8 @@ export default {
 
   props: {
     message: {
-      type: Object
+      type: Object,
+      default: () => ({})
     }
   },
 

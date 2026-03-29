@@ -1,33 +1,54 @@
-<template lang="pug">
-.qkb-board-action(
-  :class="actionClass"
-)
-  .qkb-board-action__wrapper
-    .qkb-board-action__msg-box
-      input.qkb-board-action__input(
-        type="text",
-        v-model="messageText",
-        ref="qkbMessageInput",
-        :disabled="inputDisable",
-        :placeholder="inputPlaceholder",
-        @keydown.enter="sendMessage",
-      )
-      .qkb-board-action__disable-text(
-        v-if="inputDisablePlaceholder && inputDisable"
-      )
-        span {{ inputDisablePlaceholder }}
-    .qkb-board-action__extra
-      slot(name="actions")
-      button.qkb-action-item.qkb-action-item--mic(
-        v-if="showMicButton"
-        @click="toggleRecording",
-        :disabled="inputDisable"
-      )
-        MicOff.qkb-action-icon.qkb-action-icon--mic(v-if="!isRecording")
-        MicOn.qkb-action-icon.qkb-action-icon--mic(v-else)
-      button.qkb-action-item.qkb-action-item--send(@click="sendMessage")
-        slot(name="sendButton")
-          IconSend.qkb-action-icon.qkb-action-icon--send
+<template>
+  <div
+    class="qkb-board-action"
+    :class="actionClass"
+  >
+    <div class="qkb-board-action__wrapper">
+      <div class="qkb-board-action__msg-box">
+        <input
+          ref="qkbMessageInput"
+          v-model="messageText"
+          class="qkb-board-action__input"
+          type="text"
+          :disabled="inputDisable"
+          :placeholder="inputPlaceholder"
+          @keydown.enter="sendMessage"
+        >
+        <div
+          v-if="inputDisablePlaceholder && inputDisable"
+          class="qkb-board-action__disable-text"
+        >
+          <span>{{ inputDisablePlaceholder }}</span>
+        </div>
+      </div>
+      <div class="qkb-board-action__extra">
+        <slot name="actions" />
+        <button
+          v-if="showMicButton"
+          class="qkb-action-item qkb-action-item--mic"
+          :disabled="inputDisable"
+          @click="toggleRecording"
+        >
+          <MicOff
+            v-if="!isRecording"
+            class="qkb-action-icon qkb-action-icon--mic"
+          />
+          <MicOn
+            v-else
+            class="qkb-action-icon qkb-action-icon--mic"
+          />
+        </button>
+        <button
+          class="qkb-action-item qkb-action-item--send"
+          @click="sendMessage"
+        >
+          <slot name="sendButton">
+            <IconSend class="qkb-action-icon qkb-action-icon--send" />
+          </slot>
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import IconSend from '../../assets/icons/send.svg'
@@ -35,6 +56,7 @@ import MicOn from '../../assets/icons/mic-on.svg'
 import MicOff from '../../assets/icons/mic-off.svg'
 
 export default {
+
   components: {
     IconSend,
     MicOn,
@@ -43,11 +65,13 @@ export default {
 
   props: {
     inputPlaceholder: {
-      type: String
+      type: String,
+      default: ''
     },
 
     inputDisablePlaceholder: {
-      type: String
+      type: String,
+      default: ''
     },
 
     inputDisable: {
@@ -59,6 +83,7 @@ export default {
       default: false
     }
   },
+  emits: ['msg-send', 'mic-state'],
 
   data () {
     return {
@@ -86,6 +111,13 @@ export default {
       // TODO: sending
 
       return actionClasses
+    }
+  },
+  watch: {
+    inputDisable (newVal) {
+      if (newVal && this.isRecording) {
+        this.stopRecording()
+      }
     }
   },
 
@@ -240,13 +272,6 @@ export default {
           this.mediaRecorder.stop()
         }
       }, 4000) // 4 seconds per chunk
-    }
-  },
-  watch: {
-    inputDisable (newVal) {
-      if (newVal && this.isRecording) {
-        this.stopRecording()
-      }
     }
   }
 }
