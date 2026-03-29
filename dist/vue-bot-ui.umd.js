@@ -1331,12 +1331,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5daad578-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/BotUI.vue?vue&type=template&id=28c2f457&lang=pug&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5daad578-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/BotUI.vue?vue&type=template&id=de8d6f86&lang=pug&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"qkb-bot-ui",class:_vm.uiClasses},[_c('transition',{attrs:{"name":"qkb-fadeUp"}},[(_vm.botActive)?_c('div',{staticClass:"qkb-board"},[_c('BoardHeader',{attrs:{"bot-title":_vm.optionsMain.botTitle},on:{"close-bot":_vm.botToggle},scopedSlots:_vm._u([{key:"header",fn:function(){return [_vm._t("header")]},proxy:true}],null,true)}),_c('BoardContent',{attrs:{"bot-typing":_vm.botTyping,"main-data":_vm.messages},scopedSlots:_vm._u([{key:"botTyping",fn:function(){return [_vm._t("botTyping")]},proxy:true}],null,true)}),_c('BoardAction',{ref:"boardAction",attrs:{"input-disable":_vm.inputDisable,"input-placeholder":_vm.optionsMain.inputPlaceholder,"input-disable-placeholder":_vm.optionsMain.inputDisablePlaceholder,"show-mic-button":_vm.optionsMain.showMicButton},on:{"msg-send":_vm.sendMessage,"mic-state":_vm.handleMicState},scopedSlots:_vm._u([{key:"actions",fn:function(){return [_vm._t("actions")]},proxy:true},{key:"sendButton",fn:function(){return [_vm._t("sendButton")]},proxy:true}],null,true)})],1):_vm._e()]),_c('div',{staticClass:"qkb-bot-bubble"},[_c('button',{staticClass:"qkb-bubble-btn",on:{"click":_vm.botToggle}},[_vm._t("bubbleButton",[_c('transition',{attrs:{"name":"qkb-scaleUp"}},[(!_vm.botActive)?_c('BubbleIcon',{key:"1",staticClass:"qkb-bubble-btn-icon"}):_c('CloseIcon',{key:"2",staticClass:"qkb-bubble-btn-icon qkb-bubble-btn-icon--close"})],1)])],2)]),_c('AppStyle',{attrs:{"options":_vm.optionsMain}}),_c('div',{staticClass:"qkb-preload-image"},[(_vm.optionsMain.botAvatarImg)?_c('div',{staticClass:"qkb-msg-avatar__img"}):_vm._e()])],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/BotUI.vue?vue&type=template&id=28c2f457&lang=pug&
+// CONCATENATED MODULE: ./src/components/BotUI.vue?vue&type=template&id=de8d6f86&lang=pug&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
 var regenerator = __webpack_require__("a34a");
@@ -1508,23 +1508,14 @@ var Mainvue_type_template_id_7e8c20e8_lang_pug_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/MessageBubble/Main.vue?vue&type=template&id=7e8c20e8&lang=pug&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5daad578-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MessageBubble/SingleText.vue?vue&type=template&id=21d4313e&lang=pug&
-var SingleTextvue_type_template_id_21d4313e_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"qkb-msg-bubble-component qkb-msg-bubble-component--single-text"},[_c('div',{staticClass:"qkb-msg-bubble-component__text"},[_vm._v(_vm._s(_vm.mainData.text)),(_vm.mainData.agent === 'bot')?_c('button',{staticClass:"qkb-msg-bubble-play-btn",staticStyle:{"margin-left":"8px","background":"none","border":"none","cursor":"pointer"},attrs:{"disabled":_vm.isPlaying},on:{"click":_vm.playAudio}},[(!_vm.isPlaying)?_c('span',[_vm._v("▶️")]):_c('span',[_vm._v("⏸️")])]):_vm._e()])])}
-var SingleTextvue_type_template_id_21d4313e_lang_pug_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5daad578-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MessageBubble/SingleText.vue?vue&type=template&id=24f16bf3&lang=pug&
+var SingleTextvue_type_template_id_24f16bf3_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"qkb-msg-bubble-component qkb-msg-bubble-component--single-text"},[_c('div',{staticClass:"qkb-msg-bubble-component__text"},[_vm._v(_vm._s(_vm.mainData.text))])])}
+var SingleTextvue_type_template_id_24f16bf3_lang_pug_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/MessageBubble/SingleText.vue?vue&type=template&id=21d4313e&lang=pug&
+// CONCATENATED MODULE: ./src/components/MessageBubble/SingleText.vue?vue&type=template&id=24f16bf3&lang=pug&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MessageBubble/SingleText.vue?vue&type=script&lang=js&
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
 //
 //
 //
@@ -1534,111 +1525,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: {
     mainData: {
       type: Object
-    }
-  },
-  data: function data() {
-    return {
-      isPlaying: false,
-      audio: null
-    };
-  },
-  methods: {
-    playAudio: function playAudio() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-        var cacheKey, blob, response, url;
-        return regenerator_default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                cacheKey = _this.mainData.text;
-                if (!window._audioCache) window._audioCache = {};
-
-                if (!_this.isPlaying) {
-                  _context.next = 6;
-                  break;
-                }
-
-                if (_this.audio) _this.audio.pause();
-                _this.isPlaying = false;
-                return _context.abrupt("return");
-
-              case 6:
-                _this.isPlaying = true;
-                _context.prev = 7;
-
-                if (!window._audioCache[cacheKey]) {
-                  _context.next = 12;
-                  break;
-                }
-
-                blob = window._audioCache[cacheKey];
-                _context.next = 21;
-                break;
-
-              case 12:
-                _context.next = 14;
-                return fetch('https://api-aitext2speech.hayokmedicare.ng/api/text-to-speech/', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    text: _this.mainData.text
-                  })
-                });
-
-              case 14:
-                response = _context.sent;
-
-                if (response.ok) {
-                  _context.next = 17;
-                  break;
-                }
-
-                throw new Error('TTS failed');
-
-              case 17:
-                _context.next = 19;
-                return response.blob();
-
-              case 19:
-                blob = _context.sent;
-                window._audioCache[cacheKey] = blob;
-
-              case 21:
-                url = URL.createObjectURL(blob);
-                _this.audio = new Audio(url);
-
-                _this.audio.onended = function () {
-                  _this.isPlaying = false;
-                  URL.revokeObjectURL(url);
-                };
-
-                _this.audio.onerror = function () {
-                  _this.isPlaying = false;
-                  URL.revokeObjectURL(url);
-                };
-
-                _this.audio.play();
-
-                _context.next = 32;
-                break;
-
-              case 28:
-                _context.prev = 28;
-                _context.t0 = _context["catch"](7);
-                _this.isPlaying = false;
-                console.error('Text-to-speech failed', _context.t0);
-
-              case 32:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[7, 28]]);
-      }))();
     }
   }
 });
@@ -1654,8 +1540,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var SingleText_component = normalizeComponent(
   MessageBubble_SingleTextvue_type_script_lang_js_,
-  SingleTextvue_type_template_id_21d4313e_lang_pug_render,
-  SingleTextvue_type_template_id_21d4313e_lang_pug_staticRenderFns,
+  SingleTextvue_type_template_id_24f16bf3_lang_pug_render,
+  SingleTextvue_type_template_id_24f16bf3_lang_pug_staticRenderFns,
   false,
   null,
   null,
@@ -1686,9 +1572,9 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function ButtonOptionsvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-function ButtonOptionsvue_type_script_lang_js_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { ButtonOptionsvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { ButtonOptionsvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //
 //
@@ -1738,7 +1624,7 @@ function ButtonOptionsvue_type_script_lang_js_asyncToGenerator(fn) { return func
     playAllText: function playAllText() {
       var _this = this;
 
-      return ButtonOptionsvue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
+      return _asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
         var texts, _loop, i, _ret;
 
         return regenerator_default.a.wrap(function _callee$(_context2) {
@@ -2080,12 +1966,12 @@ var Content_component = normalizeComponent(
 )
 
 /* harmony default export */ var Content = (Content_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5daad578-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Board/Action.vue?vue&type=template&id=f5809706&lang=pug&
-var Actionvue_type_template_id_f5809706_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"qkb-board-action",class:_vm.actionClass},[_c('div',{staticClass:"qkb-board-action__wrapper"},[_c('div',{staticClass:"qkb-board-action__msg-box"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.messageText),expression:"messageText"}],ref:"qkbMessageInput",staticClass:"qkb-board-action__input",attrs:{"type":"text","disabled":_vm.inputDisable,"placeholder":_vm.inputPlaceholder},domProps:{"value":(_vm.messageText)},on:{"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.sendMessage($event)},"input":function($event){if($event.target.composing){ return; }_vm.messageText=$event.target.value}}}),(_vm.inputDisablePlaceholder && _vm.inputDisable)?_c('div',{staticClass:"qkb-board-action__disable-text"},[_c('span',[_vm._v(_vm._s(_vm.inputDisablePlaceholder))])]):_vm._e()]),_c('div',{staticClass:"qkb-board-action__extra"},[_vm._t("actions"),(_vm.showMicButton)?_c('button',{staticClass:"qkb-action-item qkb-action-item--mic",attrs:{"disabled":_vm.inputDisable},on:{"click":_vm.toggleRecording}},[(!_vm.isRecording)?_c('MicOff',{staticClass:"qkb-action-icon qkb-action-icon--mic"}):_c('MicOn',{staticClass:"qkb-action-icon qkb-action-icon--mic"})],1):_vm._e(),_c('button',{staticClass:"qkb-action-item qkb-action-item--send",on:{"click":_vm.sendMessage}},[_vm._t("sendButton",[_c('IconSend',{staticClass:"qkb-action-icon qkb-action-icon--send"})])],2)],2)])])}
-var Actionvue_type_template_id_f5809706_lang_pug_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5daad578-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Board/Action.vue?vue&type=template&id=2fc04090&lang=pug&
+var Actionvue_type_template_id_2fc04090_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"qkb-board-action",class:_vm.actionClass},[_c('div',{staticClass:"qkb-board-action__wrapper"},[_c('div',{staticClass:"qkb-board-action__msg-box"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.messageText),expression:"messageText"}],ref:"qkbMessageInput",staticClass:"qkb-board-action__input",attrs:{"type":"text","disabled":_vm.inputDisable,"placeholder":_vm.inputPlaceholder},domProps:{"value":(_vm.messageText)},on:{"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.sendMessage($event)},"input":function($event){if($event.target.composing){ return; }_vm.messageText=$event.target.value}}}),(_vm.inputDisablePlaceholder && _vm.inputDisable)?_c('div',{staticClass:"qkb-board-action__disable-text"},[_c('span',[_vm._v(_vm._s(_vm.inputDisablePlaceholder))])]):_vm._e()]),_c('div',{staticClass:"qkb-board-action__extra"},[_vm._t("actions"),(_vm.showMicButton)?_c('button',{staticClass:"qkb-action-item qkb-action-item--mic",attrs:{"disabled":_vm.inputDisable},on:{"click":_vm.toggleRecording}},[(!_vm.isRecording)?_c('MicOff',{staticClass:"qkb-action-icon qkb-action-icon--mic"}):_c('MicOn',{staticClass:"qkb-action-icon qkb-action-icon--mic"})],1):_vm._e(),_c('button',{staticClass:"qkb-action-item qkb-action-item--send",on:{"click":_vm.sendMessage}},[_vm._t("sendButton",[_c('IconSend',{staticClass:"qkb-action-icon qkb-action-icon--send"})])],2)],2)])])}
+var Actionvue_type_template_id_2fc04090_lang_pug_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Board/Action.vue?vue&type=template&id=f5809706&lang=pug&
+// CONCATENATED MODULE: ./src/components/Board/Action.vue?vue&type=template&id=2fc04090&lang=pug&
 
 // CONCATENATED MODULE: ./src/assets/icons/send.svg
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -2308,7 +2194,7 @@ function Actionvue_type_script_lang_js_asyncToGenerator(fn) { return function ()
     },
     showMicButton: {
       type: Boolean,
-      "default": true
+      "default": false
     }
   },
   data: function data() {
@@ -2659,8 +2545,8 @@ function Actionvue_type_script_lang_js_asyncToGenerator(fn) { return function ()
 
 var Action_component = normalizeComponent(
   Board_Actionvue_type_script_lang_js_,
-  Actionvue_type_template_id_f5809706_lang_pug_render,
-  Actionvue_type_template_id_f5809706_lang_pug_staticRenderFns,
+  Actionvue_type_template_id_2fc04090_lang_pug_render,
+  Actionvue_type_template_id_2fc04090_lang_pug_staticRenderFns,
   false,
   null,
   null,
@@ -2939,7 +2825,7 @@ function BotUIvue_type_script_lang_js_defineProperty(obj, key, value) { if (key 
     return {
       botActive: false,
       defaultOptions: {
-        botTitle: 'Chatbot',
+        botTitle: 'Hayok Health Assistant',
         colorScheme: '#1b53d0',
         textColor: '#fff',
         bubbleBtnSize: 56,
@@ -2951,9 +2837,10 @@ function BotUIvue_type_script_lang_js_defineProperty(obj, key, value) { if (key 
         msgBubbleColorBot: '#000',
         msgBubbleBgUser: '#4356e0',
         msgBubbleColorUser: '#fff',
-        inputPlaceholder: 'Message',
+        inputPlaceholder: '',
         inputDisableBg: '#fff',
-        inputDisablePlaceholder: null
+        inputDisablePlaceholder: null,
+        showMicButton: false
       },
       micOn: false,
       isBotAudioPlaying: false,

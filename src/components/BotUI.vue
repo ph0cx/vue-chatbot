@@ -103,7 +103,7 @@ export default {
     return {
       botActive: false,
       defaultOptions: {
-        botTitle: 'Chatbot',
+        botTitle: 'Hayok Health Assistant',
         colorScheme: '#1b53d0',
         textColor: '#fff',
         bubbleBtnSize: 56,
@@ -115,9 +115,10 @@ export default {
         msgBubbleColorBot: '#000',
         msgBubbleBgUser: '#4356e0',
         msgBubbleColorUser: '#fff',
-        inputPlaceholder: 'Message',
+        inputPlaceholder: '',
         inputDisableBg: '#fff',
-        inputDisablePlaceholder: null
+        inputDisablePlaceholder: null,
+        showMicButton: false
       },
       micOn: false,
       isBotAudioPlaying: false,

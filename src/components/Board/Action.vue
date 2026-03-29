@@ -56,7 +56,7 @@ export default {
     },
     showMicButton: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
 

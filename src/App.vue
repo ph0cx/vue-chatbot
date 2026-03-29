@@ -17,7 +17,7 @@
 <script>
 import BotIcon from './assets/icons/bot.png'
 import { VueBotUI } from './vue-bot-ui'
-import { messageService } from './helpers/message'
+import { messageService, STATE_ENDPOINTS } from './helpers/message'
 
 export default {
   components: {
@@ -30,15 +30,18 @@ export default {
       messageData: [],
       botTyping: false,
       inputDisable: false,
+      selectedState: 'rivers',
+      stateEndpoints: STATE_ENDPOINTS,
       botOptions: {
+        botTitle: 'RIVCHPP Health Assistant',
         botAvatarImg: BotIcon,
         boardContentBg: '#f4f4f4',
         msgBubbleBgBot: '#fff',
-        inputPlaceholder: 'Type hereeee...',
+        inputPlaceholder: '',
         inputDisableBg: '#fff',
-        inputDisablePlaceholder: 'Hit the buttons above to respond'
-        // showPlayButton: false, // new option
-        //  showMicButton: false // new option
+        inputDisablePlaceholder: '',
+        colorScheme: 'red',
+        showMicButton: false
       }
     }
   },
@@ -48,6 +51,8 @@ export default {
       // Get token if you want to build a private bot
       // Request first message here
 
+      // Update title based on selected state
+      this.botOptions.botTitle = this.stateEndpoints[this.selectedState].name
       // Fake typing for the first message
       this.botTyping = true
       setTimeout(() => {
@@ -55,7 +60,7 @@ export default {
         this.messageData.push({
           agent: 'bot',
           type: 'text',
-          text: 'Hello'
+          text: `Hello! I am your ${this.stateEndpoints[this.selectedState].name} assistant. How can I help you today?`
         })
       }, 1000)
     },
@@ -68,19 +73,19 @@ export default {
         text: value.text
       })
 
-      this.getResponse()
+      this.getResponse(value.text)
     },
 
     // Submit the message from user to bot API, then get the response from Bot
-    getResponse () {
+    getResponse (text) {
       // Loading
       this.botTyping = true
 
       // Post the message from user here
       // Then get the response as below
 
-      // Create new message from fake data
-      messageService.createMessage()
+      // Create new message from real state API
+      messageService.fetchStateResponse(this.selectedState, text)
         .then((response) => {
           const replyMessage = {
             agent: 'bot',

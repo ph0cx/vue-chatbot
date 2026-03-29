@@ -1,8 +1,208 @@
-<meta charset="utf-8">
-<title>vue-bot-ui demo</title>
-<script src="./vue-bot-ui.umd.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Personal Chatbot Project</title>
+</head>
+<body>
+  <div id="app">
+    <div class="header-section">
+      <h1>Health Assistant Demo</h1>
+      <p>Select a state to switch the health assistant:</p>
+      
+      <div class="state-selector">
+        <select v-model="selectedState" @change="onStateChange">
+          <option v-for="(state, key) in stateEndpoints" :key="key" :value="key">
+            {{ state.name }}
+          </option>
+        </select>
+      </div>
+    </div>
 
+    <!-- Use the component -->
+    <vue-bot-ui
+      :options="botOptions"
+      :messages="botMessages"
+      :bot-typing="botTyping"
+      :input-disable="inputDisable"
+      @msg-send="onMessageSend"
+    ></vue-bot-ui>
+  </div>
 
-<script>
-console.log(vue-bot-ui)
-</script>
+  <!-- 1. Include Vue.js (v2 is required) -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+  <!-- 2. Include the compiled library -->
+  <script src="./vue-bot-ui.umd.min.js"></script>
+
+  <script>
+    // Access the component and configuration from the global variable
+    const { VueBotUI } = window['vue-bot-ui'];
+
+    new Vue({
+      el: '#app',
+      components: {
+        'vue-bot-ui': VueBotUI
+      },
+      data() {
+        return {
+          botTyping: false,
+          inputDisable: false,
+          selectedState: 'rivers',
+          stateEndpoints: {
+            rivers: {
+              name: 'RIVCHPP Health Assistant',
+              endpoint: 'https://ai.hiva.chat/api/v1/chat/river-state-health-assistant',
+              color: '#1b53d0'
+            },
+            kogi: {
+              name: 'KGSHIA Health Assistant',
+              endpoint: 'https://ai.hiva.chat/api/v1/chat/kogi-health-assistant',
+              color: '#2e7d32'
+            },
+            zamfara: {
+              name: 'ZAMCHEMA Health Assistant',
+              endpoint: 'https://ai.hiva.chat/api/v1/chat/zam-health-assistant',
+              color: '#d32f2f'
+            },
+            ohis: {
+              name: 'OHIS Health Assistant',
+              endpoint: 'https://ai.hiva.chat/api/v1/chat/ohis-assistant',
+              color: '#fbc02d'
+            }
+          },
+          // Full configuration options
+          botOptions: {
+            botTitle: 'RIVCHPP Health Assistant',
+            colorScheme: '#1b53d0',
+            textColor: '#fff',
+            bubbleBtnSize: 56,
+            animation: true,
+            boardContentBg: '#f4f4f4',
+            botAvatarImg: 'https://ai.hiva.chat/logo.png',
+            botAvatarSize: 32,
+            msgBubbleBgBot: '#fff',
+            msgBubbleColorBot: '#333',
+            msgBubbleBgUser: '#4356e0',
+            msgBubbleColorUser: '#fff',
+            inputPlaceholder: 'Type your health query...',
+            inputDisableBg: '#fff',
+            inputDisablePlaceholder: 'Bot is thinking...',
+            showMicButton: false
+          },
+          botMessages: [
+            { 
+              agent: 'bot', 
+              type: 'text', 
+              text: 'Hello! I am your RIVCHPP Health Assistant. How can I help you today?' 
+            }
+          ]
+        }
+      },
+      methods: {
+        onStateChange() {
+          const state = this.stateEndpoints[this.selectedState];
+          
+          // Update UI
+          this.botOptions.botTitle = state.name;
+          this.botOptions.colorScheme = state.color;
+          
+          // Reset messages
+          this.botMessages = [
+            { 
+              agent: 'bot', 
+              type: 'text', 
+              text: `Hello! I am your ${state.name}. How can I help you today?` 
+            }
+          ];
+        },
+        async onMessageSend(payload) {
+          const state = this.stateEndpoints[this.selectedState];
+          
+          this.botMessages.push({
+            agent: 'user',
+            type: 'text',
+            text: payload.text
+          });
+
+          this.botTyping = true;
+          this.inputDisable = true;
+
+          try {
+            const response = await fetch(state.endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ message: payload.text })
+            });
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            this.botMessages.push({
+              agent: 'bot',
+              type: 'text',
+              text: data.answer || "I'm sorry, I couldn't process that request."
+            });
+
+          } catch (error) {
+            console.error('Error fetching bot response:', error);
+            this.botMessages.push({
+              agent: 'bot',
+              type: 'text',
+              text: 'Sorry, I am having trouble connecting. Please try again later.'
+            });
+          } finally {
+            this.botTyping = false;
+            this.inputDisable = false;
+          }
+        }
+      }
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .header-section {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .state-selector {
+      margin-top: 15px;
+    }
+    .state-selector select {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      cursor: pointer;
+      outline: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .state-selector select:focus {
+      border-color: #1b53d0;
+    }
+    h1 {
+      color: #1b53d0;
+      margin-bottom: 5px;
+    }
+    p {
+      color: #65676b;
+      margin: 0;
+    }
+  </style>
+</body>
+</html>
