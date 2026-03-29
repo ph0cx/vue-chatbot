@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <img
-      alt="Vue Bot UI"
-      src="./assets/logo.png"
-    >
     <VueBotUI
       :options="botOptions"
       :messages="messageData"
@@ -30,7 +26,7 @@ export default {
       messageData: [],
       botTyping: false,
       inputDisable: false,
-      selectedState: 'rivers',
+      selectedState: 'zamfara',
       stateEndpoints: STATE_ENDPOINTS,
       botOptions: {
         botTitle: 'RIVCHPP Health Assistant',
@@ -40,7 +36,8 @@ export default {
         inputPlaceholder: '',
         inputDisableBg: '#fff',
         inputDisablePlaceholder: '',
-        colorScheme: 'red',
+        colorScheme: '#008374',
+        msgBubbleBgUser: '#008374',
         showMicButton: false
       }
     }
@@ -53,6 +50,11 @@ export default {
 
       // Update title based on selected state
       this.botOptions.botTitle = this.stateEndpoints[this.selectedState].name
+
+      if (this.messageData.length > 0) {
+        return
+      }
+
       // Fake typing for the first message
       this.botTyping = true
       setTimeout(() => {
