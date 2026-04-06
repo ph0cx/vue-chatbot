@@ -1,15 +1,13 @@
 <template>
-  <div id="app">
-    <VueBotUI
-      :options="botOptions"
-      :messages="messageData"
-      :bot-typing="botTyping"
-      :input-disable="inputDisable"
-      :is-open="false"
-      @init="botStart"
-      @msg-send="msgSend"
-    />
-  </div>
+  <VueBotUI
+    :options="botOptions"
+    :messages="messageData"
+    :bot-typing="botTyping"
+    :input-disable="inputDisable"
+    :is-open="false"
+    @init="botStart"
+    @msg-send="msgSend"
+  />
 </template>
 <script>
 import BotIcon from './assets/icons/bot.png'
@@ -69,7 +67,7 @@ export default {
         this.messageData.push({
           agent: 'bot',
           type: 'text',
-          text: `Hello! I am your ${this.stateEndpoints[this.selectedState].name} . How can I help you today?`
+          text: `Hello! I am ${this.stateEndpoints[this.selectedState].name} . How can I help you today?`
         })
       }, 1000)
     },
@@ -112,12 +110,4 @@ export default {
 }
 </script>
 <style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

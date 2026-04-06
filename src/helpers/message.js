@@ -16,11 +16,11 @@ export const STATE_ENDPOINTS = {
     endpoint: 'https://ai.hiva.chat/api/v1/chat/ohis-assistant'
   },
   hiva_medichat: {
-    name: 'HIVA Medichat',
+    name: 'HIVA MediChat Assistant',
     endpoint: 'https://ai.hiva.chat/api/v1/chat/hiva-medichat'
   },
   hiva: {
-    name: 'HIVA',
+    name: 'HIVA Health Assistant',
     endpoint: 'https://ai.hiva.chat/api/v1/chat/hiva'
   }
 }

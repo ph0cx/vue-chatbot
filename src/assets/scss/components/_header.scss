@@ -13,3 +13,28 @@
   font-weight: bold;
   font-size: 0.875rem;
 }
+
+.qkb-board-header__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+}
